@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#25a9a2" />
+    <meta name="description" content="Participe do sorteio da Spaço Mãe e Bebê na 2ª Pequenos Anjos Kids Run 2026." />
+    <title>Sorteio Kids Run 2026 | Spaço Mãe e Bebê</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="https://spacomaeebebe.com.br/" aria-label="Spaço Mãe e Bebê">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-name">spaço<small>mãe e bebê</small></span>
+      </a>
+      <span class="event-tag">Kids Run 2026</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">Um presente para sua família</span>
+          <h1 id="hero-title">Participe do nosso sorteio <span aria-hidden="true">💛</span></h1>
+          <p>Cadastre sua família para concorrer à nossa cesta especial da Kids Run e conheça um pouco mais da Spaço Mãe e Bebê.</p>
+          <a class="button button-primary" href="#cadastro">Quero participar <span aria-hidden="true">↓</span></a>
+          <span class="hero-note">É rápido: leva menos de 2 minutos.</span>
+        </div>
+
+        <div class="prize-card" aria-label="Cesta especial Kids Run">
+          <div class="sun sun-one"></div><div class="sun sun-two"></div>
+          <div class="gift" aria-hidden="true">
+            <span class="gift-bow left"></span><span class="gift-bow right"></span>
+            <span class="gift-lid"></span><span class="gift-box"></span>
+          </div>
+          <div class="prize-copy"><strong>Cesta especial</strong><span>Kids Run 2026</span></div>
+        </div>
+      </section>
+
+      <section class="form-section" id="cadastro" aria-labelledby="form-title">
+        <div class="form-intro">
+          <span class="eyebrow">Seu cadastro</span>
+          <h2 id="form-title">Vamos começar?</h2>
+          <p>Conte um pouquinho sobre sua família.</p>
+        </div>
+
+        <form id="raffle-form" novalidate>
+          <input type="hidden" name="origem" value="Kids Run 2026" />
+          <input type="hidden" name="dataHora" id="data-hora" />
+
+          <fieldset class="form-step">
+            <legend><span class="step-number">1</span><span><small>Primeiro passo</small>Dados da família</span></legend>
+            <div class="field-grid">
+              <label class="field field-wide">Nome do responsável <span>*</span>
+                <input type="text" name="responsavel" autocomplete="name" placeholder="Como podemos chamar você?" required />
+                <small class="error-message">Digite o nome do responsável.</small>
+              </label>
+              <label class="field">WhatsApp <span>*</span>
+                <input type="tel" name="whatsapp" id="whatsapp" autocomplete="tel" inputmode="numeric" maxlength="15" placeholder="(47) 99999-9999" required />
+                <small class="error-message">Digite um WhatsApp válido.</small>
+              </label>
+              <label class="field">E-mail <em>opcional</em>
+                <input type="email" name="email" autocomplete="email" placeholder="voce@email.com" />
+                <small class="error-message">Digite um e-mail válido.</small>
+              </label>
+              <label class="field">Nome da criança <span>*</span>
+                <input type="text" name="crianca" autocomplete="off" placeholder="Nome da criança" required />
+                <small class="error-message">Digite o nome da criança.</small>
+              </label>
+              <label class="field">Idade da criança <span>*</span>
+                <input type="text" name="idade" inputmode="decimal" placeholder="Ex.: 2 anos ou 8 meses" required />
+                <small class="error-message">Informe a idade da criança.</small>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step" id="fase-step">
+            <legend><span class="step-number coral">2</span><span><small>Sua jornada</small>Em qual fase sua família está hoje?</span></legend>
+            <p class="helper">Você pode escolher mais de uma opção.</p>
+            <div class="choice-grid phase-grid" id="phase-options">
+              <label class="choice-card"><input type="checkbox" name="fase" value="Estou grávida" /><span class="choice-icon">♡</span><span>Estou grávida</span><i>✓</i></label>
+              <label class="choice-card"><input type="checkbox" name="fase" value="Estou no pós-parto" /><span class="choice-icon">☼</span><span>Estou no pós-parto</span><i>✓</i></label>
+              <label class="choice-card"><input type="checkbox" name="fase" value="Tenho um bebê" /><span class="choice-icon">◡</span><span>Tenho um bebê</span><i>✓</i></label>
+              <label class="choice-card"><input type="checkbox" name="fase" value="Tenho uma criança" /><span class="choice-icon">☆</span><span>Tenho uma criança</span><i>✓</i></label>
+              <label class="choice-card"><input type="checkbox" name="fase" value="Sou mulher" /><span class="choice-icon">✦</span><span>Sou mulher</span><i>✓</i></label>
+            </div>
+            <small class="group-error" id="phase-error">Escolha pelo menos uma fase.</small>
+          </fieldset>
+
+          <fieldset class="form-step interest-step" id="interest-step" hidden>
+            <legend><span class="step-number">3</span><span><small>Conte pra gente</small>O que você gostaria de conhecer melhor?</span></legend>
+            <p class="helper">Escolha quantas opções quiser.</p>
+            <div class="pill-grid" id="interest-options" aria-live="polite"></div>
+          </fieldset>
+
+          <fieldset class="form-step final-step">
+            <legend><span class="step-number coral">4</span><span><small>Quase lá</small>Preferências</span></legend>
+
+            <div class="check-panel required-panel">
+              <label class="check-row">
+                <input type="checkbox" name="participaSorteio" value="Sim" required />
+                <span class="custom-check">✓</span>
+                <span><strong>Quero participar do sorteio</strong><small>da cesta Spaço Mãe e Bebê.</small></span>
+              </label>
+              <small class="group-error">Confirme sua participação no sorteio.</small>
+            </div>
+
+            <div class="visit-block">
+              <h3>Gostaria de conhecer a Spaço Mãe e Bebê?</h3>
+              <div class="radio-list">
+                <label><input type="radio" name="visita" value="Quero agendar uma visita guiada" required /><span></span>Quero agendar uma visita guiada <b>Tenho interesse</b></label>
+                <label><input type="radio" name="visita" value="Quero receber mais informações primeiro" /><span></span>Quero receber mais informações primeiro</label>
+                <label><input type="radio" name="visita" value="Neste momento, quero apenas participar do sorteio" /><span></span>Neste momento, quero apenas participar do sorteio</label>
+              </div>
+              <small class="group-error" id="visit-error">Escolha uma opção.</small>
+            </div>
+
+            <div class="check-panel consent-panel">
+              <label class="check-row">
+                <input type="checkbox" name="autorizouComunicacao" value="Sim" />
+                <span class="custom-check">✓</span>
+                <span><strong>Quero ficar por perto</strong><small>e receber novidades, conteúdos, atividades e convites por WhatsApp e/ou e-mail.</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="submit-area">
+            <p><span aria-hidden="true">🔒</span> Seus dados serão usados com cuidado e apenas para esta campanha e comunicações autorizadas.</p>
+            <button class="button button-primary submit-button" type="submit">
+              <span class="button-label">Participar do sorteio</span><span class="spinner" aria-hidden="true"></span>
+            </button>
+            <div class="submit-error" role="alert" hidden>Não foi possível enviar agora. Confira sua conexão e tente novamente.</div>
+          </div>
+        </form>
+      </section>
+
+      <section class="success-card" id="success" hidden tabindex="-1">
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <span class="eyebrow">Tudo certo</span>
+        <h2>Cadastro realizado! 💛</h2>
+        <p>Pronto, você já está participando do nosso sorteio. Boa sorte!</p>
+        <p class="visit-success" hidden>Que bom saber que você quer conhecer a Spaço! Nossa equipe está aqui no evento e pode conversar com você para deixar sua visita encaminhada.</p>
+        <a class="button button-primary" href="https://spacomaeebebe.com.br/">Conhecer a Spaço Mãe e Bebê</a>
+      </section>
+    </main>
+
+    <footer><span class="footer-heart">♡</span><p>Feito com carinho para famílias.</p><a href="https://spacomaeebebe.com.br/politica-de-privacidade/">Política de Privacidade</a></footer>
+  </body>
+</html>
