@@ -1,11 +1,10 @@
 const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzQn_35tifJ0aCvme6tgV0byapZ3U_3BYezxbJrtW0G35N5Tp-B0lX585Sn4D727Lhrqw/exec";
 
 const interestsByPhase = {
-  "Tenho um bebê": ["Hidro Infantil", "Baby Genius", "Musicalização Infantil", "Spaço Nutrir", "Ballet Infantil", "Fisioterapia Pediátrica", "Consultoria de Sono", "Consultoria de Amamentação", "Fonoaudiologia Pediátrica"],
-  "Tenho uma criança": ["Hidro Infantil", "Musicalização Infantil", "Ballet Infantil", "Spaço Nutrir", "Fisioterapia Pediátrica", "Fonoaudiologia Pediátrica", "Salão de Beleza Infantil"],
-  "Estou grávida": ["Hidro Mommy", "Pilates trimestre a trimestre", "Drenagem linfática", "Cursos e palestras", "Fisioterapia pélvica", "Psicologia"],
-  "Estou no pós-parto": ["Sling Dance", "Programa Fecha Diástase", "Consultoria de Sono", "Consultoria de Amamentação", "Fisioterapia pélvica", "Psicologia"],
-  "Sou mulher": ["Kangoo Jumps", "Programa Fecha Diástase", "Fisioterapia pélvica", "Psicologia"]
+  "Temos um bebê": ["Hidro Infantil", "Baby Genius", "Musicalização Infantil", "Spaço Nutrir", "Ballet Infantil", "Fisioterapia Pediátrica", "Consultoria de Sono", "Consultoria de Amamentação", "Fonoaudiologia Pediátrica"],
+  "Temos uma criança": ["Hidro Infantil", "Musicalização Infantil", "Ballet Infantil", "Spaço Nutrir", "Fisioterapia Pediátrica", "Fonoaudiologia Pediátrica", "Salão de Beleza Infantil"],
+  "Estamos esperando um bebê": ["Hidro Mommy", "Pilates trimestre a trimestre", "Drenagem linfática", "Cursos e palestras", "Fisioterapia pélvica", "Psicologia"],
+  "Estamos vivendo o pós-parto": ["Sling Dance", "Programa Fecha Diástase", "Consultoria de Sono", "Consultoria de Amamentação", "Fisioterapia pélvica", "Psicologia"]
 };
 
 const form = document.querySelector("#raffle-form");
@@ -14,6 +13,53 @@ const interestStep = document.querySelector("#interest-step");
 const interestOptions = document.querySelector("#interest-options");
 const whatsapp = document.querySelector("#whatsapp");
 const submitButton = form.querySelector("button[type='submit']");
+const childrenList = document.querySelector("#children-list");
+const addChildButton = document.querySelector("#add-child");
+
+addChildButton.addEventListener("click", () => {
+  const number = childrenList.querySelectorAll(".child-row").length + 1;
+  const row = document.createElement("div");
+  row.className = "child-row";
+  row.dataset.child = number;
+  row.innerHTML = `
+    <div class="child-row-heading">
+      <strong>Criança ${number}</strong>
+      <button class="remove-child" type="button" aria-label="Remover criança ${number}">Remover</button>
+    </div>
+    <div class="child-fields">
+      <label class="field">Nome da criança <span>*</span>
+        <input type="text" name="criancaItem" autocomplete="off" placeholder="Nome da criança" required />
+        <small class="error-message">Digite o nome da criança.</small>
+      </label>
+      <label class="field">Idade da criança <span>*</span>
+        <input type="text" name="idadeItem" inputmode="text" placeholder="Ex.: 2 anos ou 8 meses" required />
+        <small class="error-message">Informe a idade da criança.</small>
+      </label>
+    </div>`;
+  childrenList.appendChild(row);
+  updateChildRows();
+  row.querySelector("input").focus();
+});
+
+childrenList.addEventListener("click", event => {
+  const button = event.target.closest(".remove-child");
+  if (!button) return;
+  button.closest(".child-row").remove();
+  updateChildRows();
+});
+
+function updateChildRows() {
+  const rows = [...childrenList.querySelectorAll(".child-row")];
+  childrenList.classList.toggle("has-multiple", rows.length > 1);
+  rows.forEach((row, index) => {
+    const number = index + 1;
+    row.dataset.child = number;
+    row.querySelector("strong").textContent = `Criança ${number}`;
+    const remove = row.querySelector(".remove-child");
+    remove.hidden = rows.length === 1;
+    remove.setAttribute("aria-label", `Remover criança ${number}`);
+  });
+}
 
 whatsapp.addEventListener("input", () => {
   let digits = whatsapp.value.replace(/\D/g, "").slice(0, 11);
@@ -85,6 +131,10 @@ form.addEventListener("submit", async event => {
   form.querySelector(".submit-error").hidden = true;
 
   const data = Object.fromEntries(new FormData(form));
+  data.crianca = [...form.querySelectorAll("input[name='criancaItem']")].map(input => input.value.trim()).join(" | ");
+  data.idade = [...form.querySelectorAll("input[name='idadeItem']")].map(input => input.value.trim()).join(" | ");
+  delete data.criancaItem;
+  delete data.idadeItem;
   data.fase = [...form.querySelectorAll("input[name='fase']:checked")].map(input => input.value).join(", ");
   data.interesses = [...form.querySelectorAll("input[name='interesses']:checked")].map(input => input.value).join(", ");
   data.participaSorteio = "Sim";
@@ -109,7 +159,7 @@ form.addEventListener("submit", async event => {
 function showSuccess(visitChoice) {
   document.querySelector(".form-section").hidden = true;
   const success = document.querySelector("#success");
-  success.querySelector(".visit-success").hidden = visitChoice !== "Quero agendar uma visita guiada";
+  success.querySelector(".visit-success").hidden = visitChoice !== "Quero agendar uma visita guiada na Spaço";
   success.hidden = false;
   success.focus();
   success.scrollIntoView({ behavior: "smooth", block: "center" });
