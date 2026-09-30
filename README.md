@@ -14,3 +14,9 @@ Os arquivos podem ser publicados diretamente em qualquer hospedagem estática.
 4. Cole a URL publicada em `FORM_ENDPOINT`, no início de `script.js`.
 
 Sem endpoint configurado, a página funciona em modo de demonstração e mostra o fluxo completo sem persistir dados.
+
+## Display A4 e QR Code
+
+Abra `display-a4.html` no navegador e use **Ctrl + P → Salvar como PDF**. Selecione papel A4, escala 100%, margens "nenhuma" e habilite os gráficos de plano de fundo.
+
+O QR estático em `assets/qr-code.svg` aponta diretamente para a página publicada e não depende de serviço de redirecionamento.

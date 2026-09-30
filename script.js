@@ -15,6 +15,40 @@ const whatsapp = document.querySelector("#whatsapp");
 const submitButton = form.querySelector("button[type='submit']");
 const childrenList = document.querySelector("#children-list");
 const addChildButton = document.querySelector("#add-child");
+const prizeCard = document.querySelector(".prize-card");
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let lastSparkle = 0;
+  const sparkleColors = ["#f3c25c", "#ef8c7f", "#21a7a0", "#ffffff"];
+
+  function createSparkle(event, burst = false) {
+    const rect = prizeCard.getBoundingClientRect();
+    const amount = burst ? 5 : 1;
+    for (let index = 0; index < amount; index += 1) {
+      const sparkle = document.createElement("span");
+      sparkle.className = "sparkle-particle";
+      const spread = burst ? 28 : 9;
+      const x = event.clientX - rect.left + (Math.random() - .5) * spread;
+      const y = event.clientY - rect.top + (Math.random() - .5) * spread;
+      sparkle.style.setProperty("--sparkle-x", `${x}px`);
+      sparkle.style.setProperty("--sparkle-y", `${y}px`);
+      sparkle.style.setProperty("--sparkle-dx", `${(Math.random() - .5) * 48}px`);
+      sparkle.style.setProperty("--sparkle-dy", `${-18 - Math.random() * 35}px`);
+      sparkle.style.setProperty("--sparkle-color", sparkleColors[Math.floor(Math.random() * sparkleColors.length)]);
+      sparkle.style.animationDelay = `${index * 35}ms`;
+      prizeCard.appendChild(sparkle);
+      sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
+    }
+  }
+
+  prizeCard.addEventListener("pointerenter", event => createSparkle(event, true));
+  prizeCard.addEventListener("pointermove", event => {
+    if (event.pointerType === "touch" || performance.now() - lastSparkle < 90) return;
+    lastSparkle = performance.now();
+    createSparkle(event);
+  });
+  prizeCard.addEventListener("pointerdown", event => createSparkle(event, true));
+}
 
 addChildButton.addEventListener("click", () => {
   const number = childrenList.querySelectorAll(".child-row").length + 1;

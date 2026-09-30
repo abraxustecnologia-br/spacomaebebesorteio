@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Display A4 — Sorteio Spaço Mãe e Bebê</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --teal: #4dbdb3; --teal-dark: #188b82; --coral: #f3a494; --ink: #2d4c49; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #dce4e3; font-family: "Poppins", Arial, sans-serif; color: var(--ink); }
+      body { display: grid; place-items: center; padding: 20px; }
+      .sheet {
+        width: 210mm;
+        height: 297mm;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff url("assets/arabesco-claro.jpg") center/cover;
+        box-shadow: 0 12px 40px rgba(23, 63, 60, .18);
+      }
+      .sheet::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.78); }
+      .top-shape { position: absolute; z-index: 1; width: 135%; height: 81mm; top: -30mm; border-radius: 0 0 50% 50%; background: var(--teal) url("assets/arabesco-turquesa.png") center/260px auto; }
+      .brand { position: relative; z-index: 2; width: 46mm; height: 42mm; margin-top: 9mm; object-fit: contain; }
+      .content { position: relative; z-index: 2; width: 174mm; margin-top: 6mm; padding: 9mm 12mm 10mm; text-align: center; background: rgba(255,255,255,.97); border-radius: 10mm; border: .6mm solid rgba(77,189,179,.28); box-shadow: 0 5mm 14mm rgba(35,105,99,.12); }
+      .eyebrow { margin: 0 0 2mm; color: var(--coral); font-size: 4mm; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+      h1 { max-width: 145mm; margin: 0 auto 3mm; font-size: 12mm; line-height: 1.08; letter-spacing: -.04em; }
+      .intro { max-width: 135mm; margin: 0 auto 5mm; color: #5f7774; font-size: 4.3mm; line-height: 1.5; }
+      .qr-frame { width: 91mm; height: 91mm; padding: 5mm; margin: 0 auto 4mm; border-radius: 7mm; background: #fff; border: 1.2mm solid var(--teal); box-shadow: 0 3mm 8mm rgba(26,114,107,.12); }
+      .qr-frame img { width: 100%; height: 100%; display: block; }
+      .scan { margin: 0; font-size: 5mm; font-weight: 700; color: var(--teal-dark); }
+      .time { margin: 1.5mm 0 0; color: #718683; font-size: 3.4mm; }
+      .footer { position: relative; z-index: 2; margin-top: auto; width: 100%; min-height: 24mm; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background: var(--coral) url("assets/arabesco-coral.png") center/230px auto; }
+      .footer strong { font-size: 3.8mm; }.footer span { margin-top: 1mm; font-size: 2.8mm; opacity: .92; }
+      .screen-note { position: fixed; right: 18px; bottom: 18px; z-index: 10; padding: 10px 14px; border-radius: 999px; color: white; background: #263c3a; font-size: 12px; box-shadow: 0 4px 15px rgba(0,0,0,.2); }
+      @page { size: A4 portrait; margin: 0; }
+      @media print {
+        html, body { width: 210mm; height: 297mm; background: none; }
+        body { display: block; padding: 0; }
+        .sheet { box-shadow: none; }
+        .screen-note { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sheet">
+      <div class="top-shape" aria-hidden="true"></div>
+      <img class="brand" src="assets/logo-spaco-vertical-branca.png" alt="Spaço Mãe e Bebê" />
+
+      <section class="content">
+        <p class="eyebrow">Um presente para sua família</p>
+        <h1>Participe do nosso sorteio</h1>
+        <p class="intro">Cadastre sua família e concorra a uma cesta especial da Spaço Mãe e Bebê.</p>
+        <div class="qr-frame">
+          <img src="assets/qr-code.svg" alt="QR Code para acessar o formulário do sorteio" />
+        </div>
+        <p class="scan">Aponte a câmera do celular</p>
+        <p class="time">É rápido: leva menos de 2 minutos.</p>
+      </section>
+
+      <footer class="footer">
+        <strong>Spaço Mãe e Bebê</strong>
+        <span>abraxustecnologia-br.github.io/spacomaebebesorteio/</span>
+      </footer>
+    </main>
+    <div class="screen-note">Para salvar: Ctrl + P → Salvar como PDF</div>
+  </body>
+</html>
